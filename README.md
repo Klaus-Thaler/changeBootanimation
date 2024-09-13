@@ -13,3 +13,6 @@ Download and enjoy: *https://github.com/Klaus-Thaler/changeBootanimation/blob/ma
 (Klick "View raw")
 
 Support me with a small donation: *https://liberapay.com/KlausThaler*
+
+addition: my script creates a bootanimation from every gif.
+"https://github.com/Klaus-Thaler/shell/blob/main/Gif2Android-Bootanimation"
