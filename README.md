@@ -7,3 +7,5 @@ TWRP recovery is required.
 - activate ADB on your Phone
 - type: adb reboot sideload
 - then: adb sideload /path/to/changeBootanimation.zip
+
+*https://liberapay.com/KlausThaler*
