@@ -8,4 +8,7 @@ TWRP recovery is required.
 - type: adb reboot sideload
 - then: adb sideload /path/to/changeBootanimation.zip
 
+Here is an example of a bootanimation.
+Download and enjoy: *https://github.com/Klaus-Thaler/changeBootanimation/blob/main/changeBootanimation.zip*
+
 Support me with a small donation: *https://liberapay.com/KlausThaler*
