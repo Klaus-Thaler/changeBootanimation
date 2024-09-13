@@ -8,4 +8,4 @@ TWRP recovery is required.
 - type: adb reboot sideload
 - then: adb sideload /path/to/changeBootanimation.zip
 
-*https://liberapay.com/KlausThaler*
+Support me with a small donation: *https://liberapay.com/KlausThaler*
