@@ -4,7 +4,7 @@ This replaces the boot animation on Androids via sideload.
 TWRP recovery is required.
 
 
-- activate ADB on your Phone
+- first: activate ADB on your Phone
 - type: adb reboot sideload
 - then: adb sideload /path/to/changeBootanimation.zip
 
