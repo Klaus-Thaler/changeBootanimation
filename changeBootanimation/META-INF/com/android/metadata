@@ -1,0 +1,9 @@
+ota-property-files=metadata:69:321,metadata.pb:458:207                 
+ota-required-cache=0
+ota-type=BLOCK
+post-build=google/raven/raven:13/TP1A.220624.021/8877034:user/release-keys
+post-build-incremental=1660886982
+post-sdk-level=32
+post-security-patch-level=2022-08-05
+post-timestamp=1660886901
+pre-device=a20e,a20edd

@@ -1,0 +1,102 @@
+#!/sbin/sh
+# *********************************************
+# Description: universal update-binary Script
+#
+# Author: 	Klaus Thaler
+# Date: 	03.01.2024
+# *********************************************
+
+###### Display ######
+# the display screen
+SCREEN=/proc/self/fd/$2
+
+# UI_PRINT "color" "<message>" ["<message 2>" ...]
+UI_PRINT() {
+  until [ ! "$1" ]; do
+    echo -e "ui_print $1\nui_print" >> $SCREEN
+    shift
+  done
+}
+
+ABORT() {
+	UI_PRINT "ERROR: $1"
+    sleep 5
+	exit 2>/dev/NULL
+	}
+
+UI_PRINT "|---------------------------------|"
+UI_PRINT "Installed a new bootanimation."
+UI_PRINT "Developer: Klaus Thaler"
+UI_PRINT "|---------------------------------|"
+UI_PRINT " " "Prepare ..." " "
+
+
+###### the current zip installer ######
+cd /tmp && unzip -o $3 && UI_PRINT "files extract"
+
+###### device infos #######
+PRODUCT_MANUFACTURER=$(getprop "ro.product.manufacturer")
+PRODUCT_MODEL=$(getprop "ro.product.model")
+PRODUCT_NAME=$(getprop "ro.product.name")
+PRODUCT_DEVICE=$(getprop "ro.product.device")
+PRODUCT_SDK=$(getprop "ro.build.version.sdk")
+PRODUCT_ABI=$(getprop "ro.product.cpu.abi")
+BUILD_SYSTEM_ROOT=$(getprop "ro.build.system_root_image")
+#[orangefox.system.block_device]: [/dev/block/platform/13500000.dwmmc0/by-name/system]
+#[orangefox.system.mount_point]: [/system_root]
+#[ro.build.system_root_image]: [true]
+
+UI_PRINT "MODEL: $PRODUCT_MODEL"
+UI_PRINT "NAME: $PRODUCT_NAME"
+UI_PRINT "DEVICE: $PRODUCT_DEVICE"
+UI_PRINT "SDK: $PRODUCT_SDK"
+UI_PRINT "ABI: $PRODUCT_ABI"
+UI_PRINT "system_root: $BUILD_SYSTEM_ROOT"
+UI_PRINT ""
+
+###### main ######
+###########################
+
+# mount system, tests
+SYSTEM=$(cat /etc/fstab |grep -m1 /system_root | cut -d ' ' -f2)
+[ -z $SYSTEM ] || mount $SYSTEM 2>/dev/null
+SYSTEM=$(cat /etc/fstab |grep -m1 /system | cut -d ' ' -f2)
+[ -z $SYSTEM ] || mount $SYSTEM 2>/dev/null
+
+SYSTEM=$(mount |grep -m1 /system |cut -d ' ' -f3)
+UI_PRINT "found system: $SYSTEM"
+
+sleep 1
+
+mount -o remount,rw $SYSTEM 2>/dev/NULL || mount $SYSTEM && UI_PRINT "mount /system as rw"
+BOOTANIMATION=$(find $SYSTEM -name bootanimation.zip 2>/dev/null)
+UI_PRINT " " "found: $BOOTANIMATION in /system" " "
+sleep 3
+
+# bootanimation not in /system ?
+#/dev/block/dm-4 on /system_ext type ext4 (ro,seclabel,noatime,discard)
+#/dev/block/dm-2 on /product type ext4 (ro,seclabel,noatime,discard)
+#/dev/block/dm-1 on /vendor type ext4 (ro,seclabel,noatime,discard)
+#/dev/block/dm-3 on /odm type ext4 (ro,seclabel,noatime,discard)
+
+if [ -z $BOOTANIMATION ]; then 
+	mount -t ext4 -o rw /dev/block/dm-2 /product
+    BOOTANIMATION=$(find /product -name bootanimation.zip 2>/dev/null)
+    UI_PRINT " " "found: $BOOTANIMATION in /product" " "
+    sleep 3
+fi
+
+if [ -z $BOOTANIMATION ]; then 
+	ABORT "No Entry found."; 
+fi
+
+UI_PRINT "Beginn ..." " " 
+
+UI_PRINT "Install new bootanimation."
+DIR=$(dirname $BOOTANIMATION)
+UI_PRINT "$DIR"
+cp /tmp/files/bootanimation.zip $DIR
+
+UI_PRINT "----------------" "Finished" "----------------" " " ""
+sleep 3
+exit 0
