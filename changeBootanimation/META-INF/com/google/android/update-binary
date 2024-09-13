@@ -99,5 +99,4 @@ cp /tmp/files/bootanimation.zip $DIR
 
 UI_PRINT "----------------" "Finished" "----------------" " " ""
 sleep 3
-reboot system
 exit 0
