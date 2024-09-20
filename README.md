@@ -10,7 +10,6 @@ TWRP recovery is required.
 
 Here is an example of a bootanimation.
 Download and enjoy: *[changeBootanimation.zip](https://github.com/Klaus-Thaler/changeBootanimation/releases)*
-(Klick "View raw")
 
 Support me with a small donation: *https://liberapay.com/KlausThaler*
 
