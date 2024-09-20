@@ -12,7 +12,6 @@
 list_files() {
 cat <<EOF
 product/media/bootanimation.zip
-product/media/shutanimation.zip
 EOF
 }
 
