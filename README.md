@@ -16,3 +16,5 @@ Support me with a small donation: *https://liberapay.com/KlausThaler*
 
 addition: my script creates a bootanimation from every gif.
 "https://github.com/Klaus-Thaler/shell/blob/main/Gif2Android-Bootanimation"
+
+Thanks https://github.com/HemanthJabalpuri for signapk.
