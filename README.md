@@ -1,7 +1,7 @@
 # changeBootanimation
 This replaces the boot animation on Androids via sideload.
 
-TWRP recovery is required.
+A free recovery like twrp is an advantage
 
 
 - first: activate ADB on your Phone
