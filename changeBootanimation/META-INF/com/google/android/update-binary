@@ -92,18 +92,13 @@ fi
 
 UI_PRINT "Beginn ..." " " 
 
-UI_PRINT "Install new bootanimation."
 DIR=$(dirname $BOOTANIMATION)
-UI_PRINT "$DIR"
+UI_PRINT "Install new bootanimation in $DIR"
 cp /tmp/files/bootanimation.zip $DIR
-cp /tmp/files/shutanimation.zip $DIR
 
 # copy addon file
 ADDON_DIR=$(find / -type d -name addon.d 2>/dev/null)
 cp /tmp/scripts/32-bootanimation.sh $ADDON_DIR
-
-UI_PRINT "-" "$DIR" "-"
-
 
 UI_PRINT "----------------" "--- Finished ---" "----------------" ""
 exit 0
